@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>blog detail</title>
+    <style>
+table, th, td {
+  border: 1px solid blue ;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+}
+table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+  border-color: gray;
+}
+</style>
+</head>
+<body>
+<div class="table-responsive">
+  <table class="table align-middle" style="background-color:#B3C7C5">
+    <thead>
+    <tr>
+        <th scope="col">id </th>
+        <th scope="col">title</th>
+        <th scope="col">Details</th>
+        <th scope="col">date</th>
+        <th scope="col">Action</th>
+
+    </tr>
+  </thead>
+        <tbody>
+        {% for val in st %}
+        <tr>
+            <td>{{val.id}}</td>
+            <td>{{val.title}}</td>
+             <td>{{val.details}}</td>
+             <td>{{val.date}}</td>
+
+             <td>
+
+                 <button><a href="{% url 'update' val.id %}">EDIT</a></button>
+                 <button><a href="{% url 'delete' val.id %}">DELETE</a></button>
+
+<!--                  {% if perms.todoapp.delete_post %}-->
+<!--                 {% endif %}-->
+             </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+  </table>
+</div>
+
+
+
+</body>
+</html>
