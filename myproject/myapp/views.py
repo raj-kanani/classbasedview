@@ -1,6 +1,4 @@
-
 from django.views import View
-
 from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import todoform
@@ -9,17 +7,19 @@ from .forms import userform
 from django.views.generic.base import TemplateView, RedirectView
 
 
-### classs based view  simple demo
+# class based view  simple demo
 
 class Home(View):
     name = 'raj-kanani'
-    def get(self, request):
 
+    def get(self, request):
         return HttpResponse(self.name)
+
 
 class Child(Home):
     def get(self, request):
         return HttpResponse(self.name)
+
 
 class Newform(View):
     def get(self, request):
@@ -32,14 +32,16 @@ class Newform(View):
             print(form.cleaned_data['name'])
             return HttpResponse('thanks for all')
 
+
 class New(View):
     f = 'form.html'
+
     def get(self, request):
         context = {'info': 'hello india whats up '}
         return render(request, self.f, context)
 
 
-#####templateview
+# template view
 class Home(TemplateView):
     template_name = 'home.html'
 
@@ -50,12 +52,15 @@ class Home(TemplateView):
         return context
 
 
-##### redirect view
+# redirect view
 class Index(RedirectView):
     url = 'https://www.google.com'
 
+
 class Index1(RedirectView):
-    pattern_name = 'index' #index page in redirect using pattern_name...
+    pattern_name = 'index'
+    '''index page in redirect using pattern_name..'''
+
 
 class Raj(RedirectView):
     pattern_name = 'raj1'
@@ -71,7 +76,7 @@ class Raj(RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-######## CRUD with class based view........
+# CRUD with class based view........
 
 class Todoview(TemplateView):
     template_name = 'todo.html'
@@ -119,12 +124,9 @@ class Updateview(View):
         fm = todoform(instance=s)
         return render(request, 'update.html', {'st': fm})
 
-
     def post(self, request, id):
         s = Todos.objects.get(id=id)
         fm = todoform(request.POST, instance=s)
         if fm.is_valid():
             fm.save()
             return HttpResponseRedirect('/tododetail/')
-
-
