@@ -6,13 +6,11 @@
 </head>
 <body>
 
-
-    <form method="post" action="" >
-        {% csrf_token %}
-<!--        TITLE : <input name="title" type="text" value={{st.title}} ><br>-->
-<!--        DETAILS : <input name="details" type="text" value="{{ st.details }}" ><br>-->
-<!--       DATE :  <input name="date" type="date" value="{{ st.date }}" ><br>-->
+    <form method="post" action="">
+    {% csrf_token %}
         {{st.as_p}}
+        UPDATE-DATE :  <input name="update_date" type="datetime-local" value="{{ st.update_date }}" ><br>
+
         <button type="submit" class="save btn btn-default">UPDATE</button>
     </form>
 </body>

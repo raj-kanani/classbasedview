@@ -43,17 +43,30 @@ table {
 
              <td>
 
-                 <button><a href="{% url 'update' val.id %}">EDIT</a></button>
-                 <button><a href="{% url 'delete' val.id %}">DELETE</a></button>
 
-<!--                  {% if perms.todoapp.delete_post %}-->
-<!--                 {% endif %}-->
+                {% if perms.myapp.change_todos %}
+                 <button><a href="{% url 'update' val.id %}">EDIT</a></button>
+                 {% else %}
+                        <h5>No update permission...</h5>
+                 {% endif %}
+
+                  {% if perms.myapp.delete_todos %}
+                 <button><a href="{% url 'delete' val.id %}">DELETE</a></button>
+                 {% else %}
+                    <h5>NO delete  permission...</h5>
+                   {% endif %}
              </td>
 
         </tr>
         {% endfor %}
         </tbody>
   </table>
+
+                 {% if perms.myapp.add_todos %}
+                     <button><a href="/todo/">ADD</a></button>
+                 {% else %}
+                        <h5>No add permission...</h5>
+                 {% endif %}
 </div>
 
 
